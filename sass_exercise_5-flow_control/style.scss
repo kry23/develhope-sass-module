@@ -1,0 +1,119 @@
+@use './variables.scss' as v;
+@use './font-mod.scss' as f;
+@use 'sass:color';
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin article-card($color, $border-color: $color_secondary, $font-size: 1rem) {
+  color: $color;
+  border: f.convert-to-rem(1) solid $border-color;
+  font-size: $font-size;
+}
+
+.headline {
+  position: relative;
+  text-align: center;
+  padding-top: f.convert-to-rem(30);
+  color: v.$color_tertiary;
+  display: inline-block;
+}
+
+.container {
+  border: f.convert-to-rem(1) solid v.$color_primary;
+  margin: f.convert-to-rem(30) auto;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    @extend .headline;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: f.convert-to-rem(2);
+      background-color: v.$color_secondary;
+    }
+  }
+  h2 {
+    @extend .headline;
+    margin-top: f.convert-to-rem(20);
+    padding: 1rem;
+    border: f.convert-to-rem(1) solid red;
+  }
+  section {
+    display: flex;
+    padding: f.convert-to-rem(10);
+    article {
+      padding: f.convert-to-rem(15) f.convert-to-rem(10);
+      text-align: center;
+      @include article-card(
+        v.$color_secondary,
+        v.$color_tertiary,
+        f.convert-to-rem((v.$font-size))
+      );
+
+      &:nth-child(odd) {
+        @include article-card(
+          v.$color_primary,
+          v.$color_tertiary,
+          v.$font-size
+        );
+      }
+      &:not(:last-child) {
+        border-right: none;
+      }
+    }
+  }
+  section {
+    &:last-child {
+      display: block;
+      width: 100%;
+      article {
+        @include article-card(
+          v.$color_tertiary,
+          v.$color_secondary,
+          f.convert-to-rem(v.$footer-font-size)
+        );
+      }
+    }
+  }
+  section[name='pic-displays'] {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    div {
+      width: f.convert-to-rem(45);
+      height: f.convert-to-rem(45);
+      border: f.convert-to-rem(1) solid red;
+    }
+  }
+}
+
+$color-1: white;
+$color-2: black;
+
+@for $index from 1 through 20 {
+  div.fs-#{$index}rem {
+    font-size: $index + rem;
+  }
+}
+@for $index from 1 through 20 {
+  $percentage: $index * 5%;
+  div.fs-#{$index} {
+    @debug $percentage;
+    @debug $index;
+
+    background-color: darken(white, $percentage);
+    color: lighten(black, $percentage);
+    @if $index == 10 {
+      background-color: blue;
+      color: red;
+    }
+  }
+}

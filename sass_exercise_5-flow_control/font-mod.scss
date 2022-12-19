@@ -1,0 +1,3 @@
+@function convert-to-rem($font-value) {
+  @return calc($font-value / 16) + rem;
+}
