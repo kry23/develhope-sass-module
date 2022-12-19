@@ -1,3 +1,48 @@
+$color_primary: red;
+$color_secondary: blue;
+$color_tertiary: green;
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 1px solid $color_primary;
+  margin: 30px auto;
+  width: 80%;
+  h1 {
+    position: relative;
+    text-align: center;
+    padding-top: 30px;
+    color: $color_tertiary;
+    width: 100%;
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 25%);
+      width: 50%;
+      height: 2px;
+      background-color: $color_secondary;
+    }
+  }
+  section {
+    display: flex;
+    padding: 10px;
+    article {
+      border: 1px solid $color_tertiary;
+      padding: 15px 10px;
+      text-align: center;
+      font-size: 13px;
+      color: $color_secondary;
+      &:nth-child(odd) {
+        color: $color_primary;
+      }
+      &:not(:last-child) {
+        border-right: none;
+      }
+    }
+  }
 }

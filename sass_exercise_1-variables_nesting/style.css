@@ -1,5 +1,47 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 1px solid red;
+  margin: 30px auto;
+  width: 80%;
+}
+.container h1 {
+  position: relative;
+  text-align: center;
+  padding-top: 30px;
+  color: green;
+  width: 100%;
+}
+.container h1::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background-color: blue;
+}
+.container section {
+  display: flex;
+  padding: 10px;
+}
+.container section article {
+  border: 1px solid green;
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 13px;
+  color: blue;
+}
+.container section article:nth-child(odd) {
+  color: red;
+}
+.container section article:not(:last-child) {
+  border-right: none;
 }
 
 /*# sourceMappingURL=style.css.map */
