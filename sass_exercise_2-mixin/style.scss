@@ -1,0 +1,71 @@
+$color_primary: red;
+$color_secondary: blue;
+$color_tertiary: green;
+$font-size: 1rem;
+$footer-font-size: 24px;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin article-card($color, $border-color: $color_secondary, $font-size: 1rem) {
+  color: $color;
+  border: 1px solid $border-color;
+  font-size: $font-size;
+}
+
+.container {
+  border: 1px solid $color_primary;
+  margin: 30px auto;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    position: relative;
+    text-align: center;
+    padding-top: 30px;
+    color: $color_tertiary;
+    display: inline-block;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $color_secondary;
+    }
+  }
+  section {
+    display: flex;
+    padding: 10px;
+    article {
+      padding: 15px 10px;
+      text-align: center;
+      @include article-card($color_secondary, $color_tertiary, $font-size);
+
+      &:nth-child(odd) {
+        @include article-card($color_primary, $color_tertiary, $font-size);
+      }
+      &:not(:last-child) {
+        border-right: none;
+      }
+    }
+  }
+  section {
+    &:last-child {
+      display: block;
+      width: 100%;
+      article {
+        @include article-card(
+          $color_tertiary,
+          $color_secondary,
+          $footer-font-size
+        );
+      }
+    }
+  }
+}
